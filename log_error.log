@@ -1,0 +1,9 @@
+2019-02-21 16:35:27,061 ERROR [/cms]:173 -For security constraints with URL pattern [/*] only the HTTP methods [TRACE HEAD DELETE SEARCH PROPFIND COPY OPTIONS PUT PATCH] are covered. All other methods are uncovered.
+2019-02-21 16:35:35,089 ERROR MqRecHandler:35 -
+### Error updating database.  Cause: java.sql.SQLException: Field 'CreateDate' doesn't have a default value
+### The error may exist in com/cms/sys/mapper/SysLogEntityMapper.java (best guess)
+### The error may involve com.cms.sys.mapper.SysLogEntityMapper.insertSelective-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO sys_log  (UserId, UserName, IPAddress, `Method`, MethodLocation, Param, Remark) VALUES (?, ?, ?, ?, ?, ?, ?)
+### Cause: java.sql.SQLException: Field 'CreateDate' doesn't have a default value
+; Field 'CreateDate' doesn't have a default value; nested exception is java.sql.SQLException: Field 'CreateDate' doesn't have a default value

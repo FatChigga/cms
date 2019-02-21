@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>用户登录</title>
+    <link th:href="@{/bower_components/bootstrap/dist/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="loginheader">
+    <p><span class="systemtitle"><span class="bluetxt">酒店屏</span>&nbsp;管理中心</span> <span
+            class="systeminfo">欢迎光临本系统!</span></p>
+    <span class="datetxt">今天是：<span class="datetime" th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd')}"></span></span>
+</div>
+<div class="loginwrapper">
+    <div class="logincontent">
+        <div class="loginbox">
+            <div class="inputbox">
+                <div class="form-login">
+                    <form th:action="${#httpServletRequest.getScheme() + '://' +
+                            #httpServletRequest.getServerName() + ':' + #request.getServerPort()  +
+                            #request.getContextPath() + '/admin/login'}" th:method="POST">
+                        <fieldset>
+                            <label>用户登录</label>
+                            <div class="errorbox" th:text="${message}"></div>
+                            <div class="inputwrapper">
+                                <i class="icon glyphicon glyphicon-user"></i>
+                                <input type="text" name="username" placeholder="请输入用户名"/>
+                            </div>
+                            <div class="inputwrapper">
+                                <i class="icon glyphicon glyphicon-lock"></i>
+                                <input type="password" name="password" placeholder="请输入用户密码"/>
+                            </div>
+                            <div class="loginbtnwrapper">
+                                <button type="submit" class="loginbtn" id="btn-login">登 录</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loginfooter">
+    <p>Copyright @ 2016 成都翼联科技有限公司</p>
+</div>
+<script th:inline="javascript" type="text/javascript">
+    /*<![CDATA[*/
+    basePath = /*[[@{/}]]*/ '';
+    /*]]>*/
+</script>
+
+</body>
+
+</html>
