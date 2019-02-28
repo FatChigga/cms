@@ -17,6 +17,9 @@ import static org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities
 import static org.mybatis.generator.internal.util.StringUtility.escapeStringForJava;
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 
+/**
+ * @author songyuxiang
+ */
 public class MapperPlugin extends PluginAdapter {
 
     private String daoTargetPackage;
@@ -49,6 +52,9 @@ public class MapperPlugin extends PluginAdapter {
                         //添加import项
                         unit.addImportedType(new FullyQualifiedJavaType("java.util.List"));
                         unit.addImportedType(new FullyQualifiedJavaType("java.util.Map"));
+                        unit.addImportedType(new FullyQualifiedJavaType("com.cms.core.mapper.BaseMapper"));
+
+                        ((Interface) unit).addSuperInterface(new FullyQualifiedJavaType("BaseMapper<"+introspectedTable.getBaseRecordType()+",String>"));
 
                         //新建一个方法
                         Method method = new Method();

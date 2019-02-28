@@ -1,5 +1,6 @@
 package com.cms.sys.mapper;
 
+import com.cms.core.mapper.BaseMapper;
 import com.cms.sys.entity.SysUserRoleEntity;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface SysUserRoleEntityMapper {
+public interface SysUserRoleEntityMapper  extends BaseMapper<SysUserRoleEntity, String> {
     @Delete({
         "delete from sys_user_role",
         "where Id = #{id,jdbcType=BIGINT}"

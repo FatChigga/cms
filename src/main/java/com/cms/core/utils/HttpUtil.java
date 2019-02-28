@@ -120,11 +120,12 @@ public class HttpUtil {
         } catch (Exception e) {
             throw e;
         } finally {
-            if (response != null)
+            if (response != null) {
                 try {
                     response.close();
                 } catch (IOException e) {
                 }
+            }
         }
     }
 }

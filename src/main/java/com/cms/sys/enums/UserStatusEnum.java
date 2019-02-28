@@ -1,4 +1,4 @@
-package com.cms.core.common;
+package com.cms.sys.enums;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

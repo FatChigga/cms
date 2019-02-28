@@ -23,8 +23,9 @@ public class SwaggerConfig {
         Predicate<RequestHandler> predicate = new Predicate<RequestHandler>() {
             @Override
             public boolean apply(RequestHandler input) {
-                if (input.isAnnotatedWith(ApiOperation.class))//只有添加了ApiOperation注解的method才在API中显示
+                if (input.isAnnotatedWith(ApiOperation.class)) {//只有添加了ApiOperation注解的method才在API中显示
                     return true;
+                }
                 return false;
             }
         };

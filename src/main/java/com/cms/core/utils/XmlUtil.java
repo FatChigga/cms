@@ -90,8 +90,9 @@ public class XmlUtil {
                     map.put(iter.getName(), iter.getText());
                 }
             }
-        } else
+        } else {
             map.put(e.getName(), e.getText());
+        }
         return map;
     }
 

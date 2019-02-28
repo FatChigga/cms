@@ -46,8 +46,10 @@ public class LoggerAspect {
     public void logPoint() {
     }
 
-    private Date startTime; // 开始时间
-    private Date endTime; // 结束时间
+    // 开始时间
+    private Date startTime;
+    // 结束时间
+    private Date endTime;
 
     @Before("logPoint()")
     public void doBeforeInServiceLayer(JoinPoint joinPoint){

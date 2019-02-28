@@ -1,5 +1,6 @@
 package com.cms.sys.mapper;
 
+import com.cms.core.mapper.BaseMapper;
 import com.cms.sys.entity.SysPermissionEntity;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 @Mapper
 @Repository
-public interface SysPermissionEntityMapper{
+public interface SysPermissionEntityMapper extends BaseMapper<SysPermissionEntity,String>{
     @Delete({
         "delete from sys_permission",
         "where Id = #{id,jdbcType=INTEGER}"

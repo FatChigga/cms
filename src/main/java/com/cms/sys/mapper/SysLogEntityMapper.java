@@ -1,16 +1,18 @@
 package com.cms.sys.mapper;
 
+import com.cms.core.mapper.BaseMapper;
 import com.cms.sys.entity.SysLogEntity;
 import java.util.List;
 import java.util.Map;
 
+import com.cms.sys.entity.SysLogLoginEntity;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface SysLogEntityMapper {
+public interface SysLogEntityMapper extends BaseMapper<SysLogEntity, String> {
     @Delete({
         "delete from sys_log",
         "where Id = #{id,jdbcType=INTEGER}"

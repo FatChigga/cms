@@ -1,6 +1,7 @@
 package com.cms.core.config;
 
 import com.cms.core.exception.BizException;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.*;
 
 /** 类名: RequestLimitContract
  * 包名: com.familyservice.config
@@ -49,16 +51,12 @@ public class RequestLimitContract {
             }
             int count = redisTemplate.get(key);
             if (count > 0) {
-                //创建一个定时器
-                Timer timer = new Timer();
-                TimerTask timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        redisTemplate.remove(key);
-                    }
-                };
-                //这个定时器设定在time规定的时间之后会执行上面的remove方法，也就是说在这个时间后它可以重新访问
-                timer.schedule(timerTask, limit.time());
+                //这个线程设定在time规定的时间之后会执行上面的remove方法，也就是说在这个时间后它可以重新访问
+                ThreadFactory threadFactory =
+                        new ThreadFactoryBuilder().setNameFormat("request-limit-pool-%d").build();
+                ScheduledExecutorService scheduledExecutorService =
+                        new ScheduledThreadPoolExecutor(1,threadFactory);
+                scheduledExecutorService.schedule(() -> redisTemplate.remove(key),limit.time(), TimeUnit.MILLISECONDS);
             }
             if (count > limit.count()) {
                 logger.info("用户IP[" + ip + "]访问地址[" + url + "]超过了限定的次数[" + limit.count() + "]");

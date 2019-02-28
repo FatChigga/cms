@@ -10,6 +10,9 @@ import java.util.Iterator;
 
 import static org.mybatis.generator.api.dom.OutputUtilities.javaIndent;
 
+/**
+ * @author songyuxiang
+ */
 public class AnnotatedSelectAllMethodGengrator extends SelectAllMethodGengrator {
 
     private boolean useResultMapIfAvailable;

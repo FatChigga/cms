@@ -88,8 +88,9 @@ public class EncryptUtil {
 
     public static byte[] hex2byte(byte[] b) {
 
-        if (b.length % 2 != 0)
+        if (b.length % 2 != 0) {
             throw new IllegalArgumentException("长度不是偶数");
+        }
 
         byte[] b2 = new byte[b.length / 2];
 
@@ -120,8 +121,9 @@ public class EncryptUtil {
 
                 hs = hs + "0" + stmp;
 
-            } else
+            } else {
                 hs = hs + stmp;
+            }
 
         }
 

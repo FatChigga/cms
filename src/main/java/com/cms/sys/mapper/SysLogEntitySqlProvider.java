@@ -4,7 +4,7 @@ import com.cms.sys.entity.SysLogEntity;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class SysLogEntitySqlProvider {
+public class SysLogEntitySqlProvider  {
 
     public String insertSelective(SysLogEntity record) {
         SQL sql = new SQL();

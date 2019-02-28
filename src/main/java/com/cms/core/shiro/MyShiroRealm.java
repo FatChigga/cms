@@ -1,13 +1,12 @@
 package com.cms.core.shiro;
 
-import com.cms.core.common.UserStatusEnum;
+import com.cms.sys.enums.UserStatusEnum;
 import com.cms.core.utils.JsonUtil;
 import com.cms.sys.entity.SysUserEntity;
 import com.cms.sys.entity.SysUserRoleEntity;
 import com.cms.sys.service.SysRolePermissionService;
 import com.cms.sys.service.SysUserRoleService;
 import com.cms.sys.service.SysUserService;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -212,8 +211,9 @@ public class MyShiroRealm extends AuthorizingRealm {
     }
 
     private static int comparator(Map<String, Object> map1, Map<String, Object> map2) {
-        if (map1 == null && map2 == null)
+        if (map1 == null && map2 == null) {
             return 0;
+        }
         if (map1 == null || map2 == null) {
             throw new NullPointerException();
         }

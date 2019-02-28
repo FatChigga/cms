@@ -36,7 +36,6 @@ public class AdminLoginController
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, name = "执行登陆操作")
-    /*@RequestLimit(count=2,time=60000) 请求限制demo*/
     public String fail(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         Map param = new HashMap();
         param.put("IPAddress", IpGet.getIpAddress(request));
@@ -54,23 +53,29 @@ public class AdminLoginController
         String loginFailure = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
         if (loginFailure != null) {
             switch (loginFailure){
+                //验证码错误
                 case "org.apache.shiro.authc.pam.UnsupportedTokenException":
-                    message = "验证码错误!";//验证码错误
+                    message = "验证码错误!";
                     break;
+                //用户名或密码错误
                 case "org.apache.shiro.authc.UnknownAccountException":
-                    message = "用户名或密码错误!";//用户名或密码错误
+                    message = "用户名或密码错误!";
                     break;
+                //此账号已被禁用
                 case "org.apache.shiro.authc.DisabledAccountException":
-                    message = "该帐号已被禁用，请联系系统管理员";//此账号已被禁用
+                    message = "该帐号已被禁用，请联系系统管理员";
                     break;
+                //此账号密码输入错误已达5次被锁定，30分钟后解锁
                 case "org.apache.shiro.authc.LockedAccountException":
-                    message = "此账号密码输入错误已达5次被锁定，30分钟后解锁!";//此账号密码输入错误已达5次被锁定，30分钟后解锁
+                    message = "此账号密码输入错误已达5次被锁定，30分钟后解锁!";
                     break;
+                //账号认证失败
                 case "org.apache.shiro.authc.AuthenticationException":
-                    message = "账号认证失败!";//账号认证失败
+                    message = "账号认证失败!";
                     break;
+                //错误
                 case "org.apache.shiro.authc.IncorrectCredentialsException":
-                    message = "密码错误";//错误
+                    message = "密码错误";
                     break;
                 default:
                     message = "鉴权失败";
@@ -88,7 +93,9 @@ public class AdminLoginController
             sysLogLoginEntity.setLoginstatus(0);
 
             sysLogLoginService.saveLoginLog(sysLogLoginEntity);
-            if(!message.isEmpty())redirectAttributes.addFlashAttribute("message", message);
+            if(!message.isEmpty()){
+                redirectAttributes.addFlashAttribute("message", message);
+            }
         }
         return "redirect:/admin/login";
     }

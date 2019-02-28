@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * @author songyuxiang
+ */
 public class SelectAllMethodGengrator extends AbstractJavaMapperMethodGenerator {
     private boolean isSimple;
 

@@ -1,5 +1,6 @@
 package com.cms.sys.mapper;
 
+import com.cms.core.mapper.BaseMapper;
 import com.cms.sys.entity.SysLogLoginEntity;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface SysLogLoginEntityMapper {
+public interface SysLogLoginEntityMapper extends BaseMapper<SysLogLoginEntity, String> {
     @Delete({
         "delete from sys_log_login",
         "where Id = #{id,jdbcType=INTEGER}"

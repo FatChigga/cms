@@ -1,5 +1,6 @@
 package com.cms.sys.mapper;
 
+import com.cms.core.mapper.BaseMapper;
 import com.cms.sys.entity.SysRolePermissionEntity;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface SysRolePermissionEntityMapper {
+public interface SysRolePermissionEntityMapper extends BaseMapper<SysRolePermissionEntity,String> {
     @Delete({
         "delete from sys_role_permission",
         "where Id = #{id,jdbcType=BIGINT}"

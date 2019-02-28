@@ -1,5 +1,6 @@
 package com.cms.core.config;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -12,8 +13,7 @@ import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 @Configuration
 public class RabbitConfig {
@@ -41,7 +41,12 @@ public class RabbitConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setPrefetchCount(DEFAULT_PREFETCH_COUNT);
         factory.setConcurrentConsumers(DEFAULT_CONCURRENT);
-        ExecutorService service = Executors.newFixedThreadPool(500);
+        BlockingQueue<Runnable> arrayBlockingQueue = new ArrayBlockingQueue(500);
+        RejectedExecutionHandler rejectedExecutionHandler = new ThreadPoolExecutor.CallerRunsPolicy();
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("rabbit-pool-%d").build();
+        ExecutorService service =
+                new ThreadPoolExecutor(500,500,0L,
+                        TimeUnit.MILLISECONDS,arrayBlockingQueue,threadFactory,rejectedExecutionHandler);
         factory.setTaskExecutor(service);
         configurer.configure(factory, connectionFactory);
         return factory;
